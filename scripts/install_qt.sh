@@ -2,4 +2,4 @@
 
 source "$HOME/.bashrc"
 
-/root/.local/bin/aqt install-qt --outputdir /opt/Qt linux desktop ${QT_VERSION}
+aqt install-qt --outputdir /opt/Qt linux desktop ${QT_VERSION}
