@@ -18,14 +18,16 @@ RUN yum -y update \
     && yum clean all \
     && rm -rf /var/cache/yum
 
-COPY ./scripts/install_python.sh ./scripts/install_pipx.sh ./scripts/install_qt.sh /
+COPY ./scripts/install_python.sh /
 ARG PYTHON_VERSION=3.9
 RUN /install_python.sh && rm -f /install_python.sh
+COPY ./scripts/install_pipx.sh /
 RUN /install_pipx.sh && rm -f /install_pipx.sh
 ARG AQTINSTALL_VERSION=3.1.7
 RUN pipx install aqtinstall==${AQTINSTALL_VERSION}
 ENV PATH=/root/.local/bin:$PATH
 ARG QT_VERSION=6.4.2
+COPY ./scripts/install_qt.sh /
 RUN /install_qt.sh && rm -f /install_qt.sh
 
 ENV PATH="/opt/Qt/${QT_VERSION}/gcc_64/bin:$PATH"

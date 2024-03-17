@@ -19,14 +19,15 @@ RUN apt-get update && \
         git \
     && rm -rf /var/lib/apt/lists/*
 
-COPY ./scripts/install_python.sh ./scripts/install_pipx.sh ./scripts/install_qt.sh /
-
+COPY ./scripts/install_python.sh /
 RUN /install_python.sh && rm -f /install_python.sh
+COPY ./scripts/install_pipx.sh /
 RUN /install_pipx.sh && rm -f /install_pipx.sh
 RUN pipx install aqtinstall==${AQTINSTALL_VERSION}
 
 ENV PATH=/root/.local/bin:$PATH
 
+COPY ./scripts/install_qt.sh /
 RUN /install_qt.sh && rm -f /install_qt.sh
 
 ENV PATH="/opt/Qt/${QT_VERSION}/gcc_64/bin:$PATH"
