@@ -4,6 +4,20 @@ ARG PYTHON_VERSION=3.9
 ARG AQTINSTALL_VERSION=3.1.6
 ARG QT_VERSION=6.4.2
 
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        build-essential \
+        zlib1g-dev \
+        libncurses5-dev \
+        libgdbm-dev \
+        libnss3-dev \
+        libssl-dev \
+        libreadline-dev \
+        libffi-dev \
+        curl \
+        software-properties-common
+    && rm -rf /var/lib/apt/lists/*
+
 COPY ./scripts/install_python.sh ./scripts/install_pipx.sh ./scripts/install_qt.sh /
 
 RUN /install_python.sh && rm -f /install_python.sh
