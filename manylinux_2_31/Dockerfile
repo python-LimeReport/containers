@@ -15,6 +15,6 @@ ENV PATH=/root/.local/bin:$PATH
 RUN /install_qt.sh && rm -f /install_qt.sh
 
 ENV PATH="/opt/Qt/${QT_VERSION}/gcc_64/bin:$PATH"
-ENV LD_LIBRARY_PATH="/opt/Qt/${{ matrix.qt }}/gcc_64/lib"
+ENV LD_LIBRARY_PATH="/opt/Qt/${QT_VERSION}/gcc_64/lib"
 ENV QT_VERSION=${QT_VERSION}
 ENV PYTHON_VERSION=${PYTHON_VERSION}
