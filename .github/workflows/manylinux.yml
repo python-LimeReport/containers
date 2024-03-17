@@ -33,4 +33,4 @@ jobs:
           file: ${{ matrix.image }}/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/python-LimeReport/${{ matrix.image }}:Py-${{ matrix.python }}-Qt-${{ matrix.qt }}
+          tags: ghcr.io/python-limereport/${{ matrix.image }}:Py-${{ matrix.python }}-Qt-${{ matrix.qt }}
