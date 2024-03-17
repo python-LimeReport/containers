@@ -15,7 +15,7 @@ RUN apt-get update && \
         libreadline-dev \
         libffi-dev \
         curl \
-        software-properties-common
+        software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./scripts/install_python.sh ./scripts/install_pipx.sh ./scripts/install_qt.sh /
