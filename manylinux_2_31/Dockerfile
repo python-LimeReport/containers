@@ -16,6 +16,7 @@ RUN apt-get update && \
         libffi-dev \
         curl \
         software-properties-common \
+        git \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./scripts/install_python.sh ./scripts/install_pipx.sh ./scripts/install_qt.sh /
