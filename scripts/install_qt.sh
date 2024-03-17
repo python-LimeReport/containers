@@ -64,13 +64,15 @@ else
         libgl1-mesa-dev \
         libgles2-mesa-dev \
         libgl1-mesa-dri \
+        libgl-dev \
+        libegl-dev \
         p7zip-full \
     && rm -rf /var/lib/apt/lists/*
 
     aqt install-src --outputdir /opt/Qt linux desktop ${QT_VERSION}
 
     cd /opt/Qt/${QT_VERSION}/Src
-    ./configure
+    ./configure -release -opensource -confirm-license -skip qtwebengine
     cmake --build . --parallel $(nproc)
     cmake --install .
 fi 
