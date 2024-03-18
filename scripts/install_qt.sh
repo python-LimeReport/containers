@@ -67,7 +67,7 @@ else
         libgl-dev \
         libegl-dev \
         p7zip-full \
-libgstreamer1.0-dev \
+        libgstreamer1.0-dev \
         libgstreamer-plugins-base1.0-dev \
         libgstreamer-plugins-good1.0-dev \
         libgstreamer-plugins-bad1.0-dev \
