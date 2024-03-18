@@ -67,6 +67,43 @@ else
         libgl-dev \
         libegl-dev \
         p7zip-full \
+libgstreamer1.0-dev \
+        libgstreamer-plugins-base1.0-dev \
+        libgstreamer-plugins-good1.0-dev \
+        libgstreamer-plugins-bad1.0-dev \
+        libavcodec-dev \
+        libavformat-dev \
+        libavdevice-dev \
+        libavutil-dev \
+        libavfilter-dev \
+        libswscale-dev \
+        libpostproc-dev \
+        libswresample-dev \
+        libva-dev \
+        libva-drm2 \
+        zstd \
+        libpcre2-dev \
+        libdouble-conversion-dev \
+        libsystemd-dev \
+        libbrotli-dev \
+        libproxy-dev \
+        libgssapi-krb5-2 \
+        libatspi2.0-dev \
+        libgbm-dev \
+        libharfbuzz-dev \
+        libmd4c-dev \
+        libxcb1-dev \
+        libgtk-3-dev \
+        libcups2-dev \
+        default-libmysqlclient-dev \
+        libpq-dev \
+        libodbc1 \
+        firebird-dev \
+        lttng-tools \
+        libassimp-dev \
+        libvulkan-dev \
+        libpcsclite-dev \
+        libhunspell-dev \
     && rm -rf /var/lib/apt/lists/*
 
     aqt install-src --outputdir /opt/Qt linux desktop ${QT_VERSION}
