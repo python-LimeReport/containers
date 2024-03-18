@@ -5,6 +5,10 @@ source "$HOME/.bashrc"
 # check is x86
 
 if [[ "$(uname -m)" == "x86_64" ]]; then
+apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        p7zip-full \
+    && rm -rf /var/lib/apt/lists/*
     aqt install-qt --outputdir /opt/Qt linux desktop ${QT_VERSION}
 else
     apt-get update && \
