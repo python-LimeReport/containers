@@ -5,12 +5,21 @@ source "$HOME/.bashrc"
 # check is x86
 
 if [[ "$(uname -m)" == "x86_64" ]]; then
-apt-get update && \
+    apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         p7zip-full \
     && rm -rf /var/lib/apt/lists/*
     aqt install-qt --outputdir /opt/Qt linux desktop ${QT_VERSION}
+    cd /opt/Qt/${QT_VERSION}
+    mv gcc_64/* .
+    mv gcc_64/.* .
+    rmdir gcc_64
 else
+    aqt -c /aqt.cfg install-src --outputdir /opt/Qt-src linux desktop ${QT_VERSION}
+
+    cd /opt/Qt-src/${QT_VERSION}/Src
+    /qt-patches/apply-patches.sh
+
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         build-essential \
@@ -110,12 +119,12 @@ else
         libhunspell-dev \
     && rm -rf /var/lib/apt/lists/*
 
-    aqt install-src --outputdir /opt/Qt linux desktop ${QT_VERSION}
-
-    cd /opt/Qt/${QT_VERSION}/Src
-    ./configure -release -opensource -confirm-license -skip qtwebengine
-    cmake --build . --parallel $(nproc)
-    cmake --install .
-fi 
-# else if arm build from sources
+    mkdir -p /opt/Qt/${QT_VERSION}
+    cd /opt/Qt-src/${QT_VERSION}/Src
+    ./configure -release -opensource -confirm-license -skip qtwebengine -prefix /opt/Qt/${QT_VERSION}
+    make -j$(nproc)
+    cmake --build . --parallel $(nproc) || exit 1
+    cmake --install . || exit 1
+    rm -rf /opt/Qt-src
+fi
 

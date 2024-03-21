@@ -1,9 +1,5 @@
 FROM ubuntu:20.04 as env
 
-ARG PYTHON_VERSION=3.9
-ARG AQTINSTALL_VERSION=3.1.6
-ARG QT_VERSION=6.4.2
-
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         build-essential \
@@ -17,20 +13,34 @@ RUN apt-get update && \
         curl \
         software-properties-common \
         git \
+        liblzma-dev \
+        libbz2-dev \
     && rm -rf /var/lib/apt/lists/*
 
+ARG PYTHON_VERSION=3.9
 COPY ./scripts/install_python.sh /
 RUN /install_python.sh && rm -f /install_python.sh
-COPY ./scripts/install_pipx.sh /
-RUN /install_pipx.sh && rm -f /install_pipx.sh
-RUN pipx install aqtinstall==${AQTINSTALL_VERSION}
+
+ARG AQTINSTALL_VERSION=3.1.12
+RUN python3 -m pip install aqtinstall==${AQTINSTALL_VERSION}
 
 ENV PATH=/root/.local/bin:$PATH
 
-COPY ./scripts/install_qt.sh /
+ARG QT_VERSION=6.4.2
+ENV QT_VERSION=${QT_VERSION}
+COPY ./scripts/install_qt.sh ./aqt.cfg /
+COPY ./qt-patches/ /qt-patches
 RUN /install_qt.sh && rm -f /install_qt.sh
 
-ENV PATH="/opt/Qt/${QT_VERSION}/gcc_64/bin:$PATH"
-ENV LD_LIBRARY_PATH="/opt/Qt/${QT_VERSION}/gcc_64/lib"
-ENV QT_VERSION=${QT_VERSION}
+# TODO
+# 1. fixes "test -x /opt/python/cp39-cp39/bin/python"
+# 2. fixes UTILITY_PYTHON = "/opt/python/cp38-cp38/bin/python"
+RUN mkdir /opt/python \
+    && ln -s /usr/local /opt/python/cp39-cp39 \
+    && ln -s /usr/local /opt/python/cp38-cp38 \
+    && ln -s /usr/local/bin/python3 /usr/local/bin/python \
+    && ln -s /usr/local/bin/pip3 /usr/local/bin/pip
+
+ENV PATH="/opt/Qt/${QT_VERSION}/bin:$PATH"
+ENV LD_LIBRARY_PATH="/opt/Qt/${QT_VERSION}/lib"
 ENV PYTHON_VERSION=${PYTHON_VERSION}

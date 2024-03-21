@@ -27,9 +27,9 @@ ARG AQTINSTALL_VERSION=3.1.7
 RUN pipx install aqtinstall==${AQTINSTALL_VERSION}
 ENV PATH=/root/.local/bin:$PATH
 ARG QT_VERSION=6.4.2
+ENV QT_VERSION=${QT_VERSION}
 COPY ./scripts/install_qt.sh /
 RUN /install_qt.sh && rm -f /install_qt.sh
 
 ENV PATH="/opt/Qt/${QT_VERSION}/gcc_64/bin:$PATH"
-ENV QT_VERSION=${QT_VERSION}
 ENV PYTHON_VERSION=${PYTHON_VERSION}
