@@ -15,7 +15,7 @@ if [[ "$(uname -m)" == "x86_64" ]]; then
     mv gcc_64/.* .
     rmdir gcc_64
 else
-    # aqt -c /aqt.cfg install-src --outputdir /opt/Qt-src linux desktop ${QT_VERSION}
+    aqt -c /aqt.cfg install-src --outputdir /opt/Qt-src linux desktop ${QT_VERSION}
 
     cd /opt/Qt-src/${QT_VERSION}/Src
     /qt-patches/apply-patches.sh

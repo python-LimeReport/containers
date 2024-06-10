@@ -29,10 +29,11 @@ ENV PATH=/root/.local/bin:$PATH
 ARG QT_VERSION=6.4.2
 ENV QT_VERSION=${QT_VERSION}
 
-COPY ./scripts/install_qt.sh ./aqt.cfg /
-RUN aqt -c /aqt.cfg install-src --outputdir /opt/Qt-src linux ${QT_VERSION}
 COPY ./qt-patches/ /qt-patches
-RUN cd /opt/Qt-src/${QT_VERSION}/Src && /qt-patches/apply-patches.sh
+COPY ./scripts/install_qt.sh ./aqt.cfg /
+# RUN aqt -c /aqt.cfg install-src --outputdir /opt/Qt-src linux ${QT_VERSION}
+
+# RUN cd /opt/Qt-src/${QT_VERSION}/Src && /qt-patches/apply-patches.sh
 
 RUN /install_qt.sh && rm -f /install_qt.sh
 
