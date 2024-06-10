@@ -136,7 +136,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 RUN mkdir -p /opt/Qt/${QT_VERSION} \
 && cd /opt/Qt-src/${QT_VERSION}/Src \
 && ./configure -release -opensource -confirm-license -skip qtwebengine -prefix /opt/Qt/${QT_VERSION} \
-make -j$(nproc)
+&& make -j$(nproc)
 
 RUN cmake --build . --parallel $(nproc) || exit 1
 RUN cmake --install . || exit 1
