@@ -7,11 +7,11 @@ on:
 
 jobs:
   build-and-publish:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, ARM64]
     strategy:
       matrix:
         python: [3.9]
-        qt: [6.4.2, 6.5.3, 6.6.2]
+        qt: [6.5.3]
         image: [manylinux_2_31]
     steps:
       - name: Checkout repository
@@ -31,6 +31,6 @@ jobs:
         with:
           context: .
           file: ${{ matrix.image }}/Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/arm64
           push: true
           tags: ghcr.io/python-limereport/${{ matrix.image }}:Py-${{ matrix.python }}-Qt-${{ matrix.qt }}

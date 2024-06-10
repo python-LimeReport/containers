@@ -20,7 +20,7 @@ RUN yum -y update \
     && yum clean all \
     && rm -rf /var/cache/yum
 
-ARG AQTINSTALL_VERSION=3.1.6
+ARG AQTINSTALL_VERSION=3.1.15
 ARG QT_VERSION=6.4.2
 
 RUN pipx install aqtinstall==${AQTINSTALL_VERSION} \
