@@ -15,7 +15,7 @@ if [[ "$(uname -m)" == "x86_64" ]]; then
     mv gcc_64/.* .
     rmdir gcc_64
 else
-    aqt -c /aqt.cfg install-src --outputdir /opt/Qt-src linux desktop ${QT_VERSION}
+    # aqt -c /aqt.cfg install-src --outputdir /opt/Qt-src linux desktop ${QT_VERSION}
 
     cd /opt/Qt-src/${QT_VERSION}/Src
     /qt-patches/apply-patches.sh
@@ -122,7 +122,7 @@ else
     mkdir -p /opt/Qt/${QT_VERSION}
     cd /opt/Qt-src/${QT_VERSION}/Src
     ./configure -release -opensource -confirm-license -skip qtwebengine -prefix /opt/Qt/${QT_VERSION}
-    make -j$(nproc)
+    # make -j$(nproc)
     cmake --build . --parallel $(nproc) || exit 1
     cmake --install . || exit 1
     rm -rf /opt/Qt-src
