@@ -34,3 +34,6 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: ghcr.io/python-limereport/${{ matrix.image }}:Py-${{ matrix.python }}-Qt-${{ matrix.qt }}
+          build-args: |
+            PYTHON_VERSION=${{ matrix.python }}
+            QT_VERSION=${{ matrix.qt }}
