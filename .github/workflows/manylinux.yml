@@ -41,5 +41,6 @@ jobs:
           cache-from: ghcr.io/python-limereport/${{ matrix.image }}:Py-${{ matrix.python }}-Qt-${{ matrix.qt }}
           tags: ghcr.io/python-limereport/${{ matrix.image }}:Py-${{ matrix.python }}-Qt-${{ matrix.qt }}
           build-args: |
+            BUILDKIT_INLINE_CACHE=1
             PYTHON_VERSION=${{ matrix.python }}
             QT_VERSION=${{ matrix.qt }}
