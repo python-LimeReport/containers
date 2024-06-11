@@ -46,6 +46,11 @@ RUN mkdir /opt/python \
     && ln -s /usr/local/bin/python3 /usr/local/bin/python \
     && ln -s /usr/local/bin/pip3 /usr/local/bin/pip
 
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        libxslt1.1 \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV PATH="/opt/Qt/${QT_VERSION}/bin:$PATH"
 ENV LD_LIBRARY_PATH="/opt/Qt/${QT_VERSION}/lib"
 ENV PYTHON_VERSION=${PYTHON_VERSION}
